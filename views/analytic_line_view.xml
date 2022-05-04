@@ -1,0 +1,28 @@
+<odoo>
+  <data>
+    <record id="project_task_account_analytic_line_view_tree" model="ir.ui.view">
+      <field name="name">project.task.account.analytic.line</field>
+      <field name="model">account.analytic.line</field>
+      <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='project_id']" position="before">
+          <field name="manager_id"/>
+          <field name="bam_id"/>
+        </xpath>
+        
+      </field>
+    </record>
+
+    <record id="custom_timesheet_view_search" model="ir.ui.view">
+      <field name="name">custom.account.analytic.line.search</field>
+      <field name="model">account.analytic.line</field>
+      <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_search"/>
+      <field name="arch" type="xml">
+        <xpath expr="//filter[@name='groupby_department']" position="after">
+          <filter context="{'group_by': 'manager_id'}" name="groupby_rp" string="Resp. de Proyecto"/>
+          <filter context="{'group_by': 'bam_id'}" name="groupby_bam" string="Business Area Manager"/>
+        </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>
